@@ -1,0 +1,74 @@
+<html>
+
+<head>
+    <title> recipe finder</title>
+</head>
+<body>
+
+<div>
+
+<input id="text" type="text" placeholder="enter the dish name for recipe" required>
+<button id="sub" onclick="search()">Search</button>
+</div>
+
+
+<div class="container">
+
+
+</div>
+
+
+
+
+
+    </body>
+
+<script>
+let text=document.getElementById("text");
+let sub=document.getElementById("sub");    
+    let container=document.querySelector(".container");
+function search(){
+    let value=text.value;
+const url = `https://api.api-ninjas.com/v3/recipe?title=${value}`;
+
+fetch(url, {
+  method: "GET",
+  headers: {
+    "X-Api-Key": "jRx5AF1vaFvNlZtj9bdHJNswUaZyVfDaoJlrOqaA"
+  }
+})
+.then(res => res.json())
+.then(data =>{ console.log(data);
+console.log(data[0].ingredients);
+console.log(data[0].title);
+
+
+container.innerHTML=`<h1>${data[0].title}</h1>`
+
+data[0].ingredients.forEach(element => {
+  
+    element.forEach(date => {
+        container.innerHTML+=`<p>${date}</p>`
+    });
+});
+
+
+
+
+
+}
+
+
+)
+.catch(err => console.log(err));
+
+
+
+
+}
+
+    
+    </script>
+
+
+</html>
