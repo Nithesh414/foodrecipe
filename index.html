@@ -24,12 +24,8 @@
     </body>
 
 <script>
-let text=document.getElementById("text");
-let sub=document.getElementById("sub");    
-    let container=document.querySelector(".container");
-function search(){
-    let value=text.value;
-const url = `https://api.api-ninjas.com/v3/recipe?title=${value}`;
+
+const url = "https://api.api-ninjas.com/v3/recipe?title=briyani";
 
 fetch(url, {
   method: "GET",
@@ -39,33 +35,20 @@ fetch(url, {
 })
 .then(res => res.json())
 .then(data =>{ console.log(data);
-console.log(data[0].ingredients);
-console.log(data[0].title);
 
+let ingrelist=[data[0].ingredients]
+console.log(ingrelist);
+ingrelist.forEach(element => {
+for(let i=0;i<element.length;i++){
 
-container.innerHTML=`<h1>${data[0].title}</h1>`
-
-data[0].ingredients.forEach(element => {
-  
-    element.forEach(date => {
-        container.innerHTML+=`<p>${date}</p>`
-    });
-});
-
-
-
-
-
+    console.log(element[i].name,element[i].quantity,element[i].unit);
 }
 
 
-)
+})
+
+})
 .catch(err => console.log(err));
-
-
-
-
-}
 
     
     </script>
